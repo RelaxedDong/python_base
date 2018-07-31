@@ -12,10 +12,10 @@ def GetPath(path):
         # else:
         #     print(path + file + '不是一个文件')
         if(os.path.isdir(os.path.join(path,file))):
-            print(os.path.join(path,file)+'是一个文件')
-            return GetPath(os.path.join(path,file))
+            print(os.path.join(path,file)+'是一个目录')
+            GetPath(os.path.join(path,file))
         else:
-            print(os.path.join(path,file)+'不是一个文件')
+            print(os.path.join(path,file)+'是一个文件')
 
 
 
