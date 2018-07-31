@@ -2,21 +2,22 @@
 
 import os
 
-path = os.path.split(os.path.abspath('.'))[0]
+path = r'D:\my_project'
 
-def GetPath(path):
+def GetPath(path,sp = ""):
     filelist = os.listdir(path)
+    sp += "  "
     for file in filelist:
         # if(os.path.isdir(os.path.join(path,file))):
         #     print(path+file+'是一个文件')
         # else:
         #     print(path + file + '不是一个文件')
         if(os.path.isdir(os.path.join(path,file))):
-            print(os.path.join(path,file)+'是一个目录')
-            GetPath(os.path.join(path,file))
+            print(sp,'目录文件',os.path.join(path,file))
+            GetPath(os.path.join(path,file),sp)
         else:
-            print(os.path.join(path,file)+'是一个文件')
+            print(sp,'普通文件',os.path.join(path,file))
 
 
 
-GetPath(path)
+GetPath(path,sp="")
