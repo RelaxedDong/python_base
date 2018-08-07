@@ -3,9 +3,9 @@ from mouse import Mouse
 from person import Person
 def main():
     ca = Cat('猫咪')
-    ca.eat()
+    # ca.eat()
     mou = Mouse('老鼠')
-    mou.eat()
+    # mou.eat()
     per = Person()
     per.feedcat(ca)
     per.feedmouse(mou)

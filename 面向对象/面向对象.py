@@ -30,10 +30,11 @@ class Person(object):
         print('%srun to'%self.name,place)
 
 
+
 person1 = Person('donghao','18',0)
+person1.run('xxx')
 # print(type(person1))
 # print(person1.name,person1.age,person1.school)
-person1.run('重庆')
 #释放对象
 # del person1
 # print(person1)
