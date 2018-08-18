@@ -2,7 +2,6 @@
 import tkinter
 
 win = tkinter.Tk()
-
 win.geometry("400x400")
 #绑定变量
 
