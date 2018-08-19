@@ -13,9 +13,14 @@ enty = tkinter.Entry(win,text='hello enty',textvariable=e)
 #获取内容
 # e.get或者enty.get()
 button = tkinter.Button(win,text='click me',command=lambda :print(e.get()))
-
+content = e.get()
 button.pack()
 enty.pack()
+import time
+time.sleep(2)
+label = tkinter.Label(win,text=content)
+label.pack()
+
 win.mainloop()
 
 
