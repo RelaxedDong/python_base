@@ -12,6 +12,9 @@ per.name = 'donghao'
 #动态添加方法
 def speak(self):
     print('xxxxxx'+self.name)
+
+
+
 from types import MethodType
 # per.say = speak(per)
 
