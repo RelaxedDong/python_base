@@ -2,8 +2,8 @@
 
 import threading
 import time
-
-a = 10
+local = threading.local()
+local.a = 10
 
 # def run():
 #     print('子线程(%s)启动'%threading.current_thread().name)
@@ -18,13 +18,8 @@ a = 10
 
 
 def run(n):
-    global a
-    for i in range(1000000000):
-        a = a + n
-        print('+n=',n)
-        a = a - n
-        print('-n=',n)
-
+    local.a = 200
+    print(local.a)
 
 
 if __name__ == '__main__':
@@ -35,10 +30,9 @@ if __name__ == '__main__':
     # 创建子线程
     #name指线程的名称
     t1 = threading.Thread(target=run,name='donghao1',args=(6,))
-    t2 = threading.Thread(target=run,name='donghao2',args=(9,))
     t1.start()
-    t2.start()
-    print(a)
+    print(local.a)
+
     t1.join()
-    t2.join()
     print('主线程(%s)结束！'%(threading.current_thread().name))
+
