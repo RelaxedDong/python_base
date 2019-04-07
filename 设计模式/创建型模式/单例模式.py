@@ -1,42 +1,41 @@
-# encoding:utf-8
-# __author__ = 'donghao'
-# __time__ = 2019/3/23 17:19
-# 基于__new__方法实现
-"""
-class Singleton(object):
-    __instance = None
-    def __init__(self,name):
-        self.name = name
+#
+# gb2312.py: Python Unicode Codec for GB2312
+#
+# Written by Hye-Shik Chang <perky@FreeBSD.org>
+#
 
-    def __new__(cls, *args, **kwargs):
-        if not cls.__instance:
-            cls.__instance = object.__new__(cls)
-            return cls.__instance
-        else:
-            return cls.__instance
+import _codecs_cn, codecs
+import _multibytecodec as mbc
 
-b = Singleton('donghao')
-a = Singleton('donghao')
-print(id(b))
-print(id(a))
-"""
+codec = _codecs_cn.getcodec('gb2312')
 
 
-# 基于装饰器实现
-def funSingle(cls):
-    _instance = {}
-
-    def inner(*args, **kwargs):
-        if cls not in _instance:
-            _instance[cls] = cls(*args, **kwargs)
-        return _instance[cls]
-
-    return inner
+class Codec(codecs.Codec):
+    encode = codec.encode
+    decode = codec.decode
 
 
-@funSingle
-class Singleton(object):
-    a = 123
+class IncrementalEncoder(mbc.MultibyteIncrementalEncoder,
+                         codecs.IncrementalEncoder):
+    codec = codec
 
-    def __init__(self, x='donghao'):
-        self.name = x
+
+class IncrementalDecoder(mbc.MultibyteIncrementalDecoder,
+                         codecs.IncrementalDecoder):
+    codec = codec
+
+
+class StreamReader(Codec, mbc.MultibyteStreamReader, codecs.StreamReader):
+    codec = codec
+
+
+class StreamWriter(Codec, mbc.MultibyteStreamWriter, codecs.StreamWriter):
+    codec = codec
+
+
+def getregentry():
+    return codecs.CodecInfo(
+        name='gb2312',
+        encode=Codec().encode,
+        decode=Codec().decode,
+        incrementalencoder=Incr

@@ -1,18 +1,25 @@
-# 1.栈(stacks)是一种只能通过访问其一端来实现数据存储与检索的线性数据结构，
-# 具有后进先出(last in first out，LIFO)的特征
+""" Python Character Mapping Codec cp1252 generated from 'MAPPINGS/VENDORS/MICSFT/WINDOWS/CP1252.TXT' with gencodec.py.
+
+"""  # "
+
+import codecs
 
 
-# 2.队列(queue)是一种具有先进先出特征的线性数据结构，
-# 元素的增加只能在一端进行，元素的删除只能在另一端进行。能够增加元素的队列一端称为队尾，
-# 可以删除元素的队列一端则称为队首。
+### Codec APIs
 
-stack = [1,2,3,4,5,6,6]
-# 去重：
-stack = list(set(stack))
-stack.append('a')
-# 出栈
-# list.pop([index=-1])
-# 移除列表中的一个元素（默认最后一个元素），并且返回该元素的值
-stack.pop()
+class Codec(codecs.Codec):
 
-print(stack)
+    def encode(self, input, errors='strict'):
+        return codecs.charmap_encode(input, errors, encoding_table)
+
+    def decode(self, input, errors='strict'):
+        return codecs.charmap_decode(input, errors, decoding_table)
+
+
+class IncrementalEncoder(codecs.IncrementalEncoder):
+    def encode(self, input, final=False):
+        return codecs.charmap_encode(input, self.errors, encoding_table)[0]
+
+
+class IncrementalDecoder(codecs.IncrementalDecoder):
+    def decode(self, input, final=False

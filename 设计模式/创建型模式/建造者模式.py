@@ -1,82 +1,64 @@
-# encoding:utf-8
-# __author__ = 'donghao'
-# __time__ = 2019/3/23 18:32
-
+""" Python Character Mapping Codec koi8_t
 """
-大话设计模式
-设计模式——建造者模式
-建造者模式(Builder):将一个复杂对象的构建与它的表示分离,使得同样的构建过程可以常见不同的表示
-特性: 指挥者(Director) 指挥 建造者(Builder) 建造 Product
-"""
-import abc
+# http://ru.wikipedia.org/wiki/КОИ-8
+# http://www.opensource.apple.com/source/libiconv/libiconv-4/libiconv/tests/KOI8-T.TXT
+
+import codecs
 
 
-class Builder(object):
-    __metaclass__ = abc.ABCMeta
+### Codec APIs
 
-    @abc.abstractmethod
-    def create_header(self):
-        pass
+class Codec(codecs.Codec):
 
-    @abc.abstractmethod
-    def create_body(self):
-        pass
+    def encode(self, input, errors='strict'):
+        return codecs.charmap_encode(input, errors, encoding_table)
 
-    @abc.abstractmethod
-    def create_hand(self):
-        pass
-
-    @abc.abstractmethod
-    def create_foot(self):
-        pass
+    def decode(self, input, errors='strict'):
+        return codecs.charmap_decode(input, errors, decoding_table)
 
 
-class Thin(Builder):
-
-    def create_header(self):
-        print('瘦子的头')
-
-    def create_body(self):
-        print('瘦子的身体')
-
-    def create_hand(self):
-        print('瘦子的手')
-
-    def create_foot(self):
-        print('瘦子的脚')
+class IncrementalEncoder(codecs.IncrementalEncoder):
+    def encode(self, input, final=False):
+        return codecs.charmap_encode(input, self.errors, encoding_table)[0]
 
 
-class Fat(Builder):
-
-    def create_header(self):
-        print('胖子的头')
-
-    def create_body(self):
-        print('胖子的身体')
-
-    def create_hand(self):
-        print('胖子的手')
-
-    def create_foot(self):
-        print('胖子的脚')
+class IncrementalDecoder(codecs.IncrementalDecoder):
+    def decode(self, input, final=False):
+        return codecs.charmap_decode(input, self.errors, decoding_table)[0]
 
 
-class Director(object):
-
-    def __init__(self, person):
-        self.person = person
-
-    def create_preson(self):
-        self.person.create_header()
-        self.person.create_body()
-        self.person.create_hand()
-        self.person.create_foot()
+class StreamWriter(Codec, codecs.StreamWriter):
+    pass
 
 
-if __name__ == "__main__":
-    thin = Thin()
-    fat = Fat()
-    director_thin = Director(thin)
-    director_fat = Director(fat)
-    director_thin.create_preson()
-    director_fat.create_preson()
+class StreamReader(Codec, codecs.StreamReader):
+    pass
+
+
+### encodings module API
+
+def getregentry():
+    return codecs.CodecInfo(
+        name='koi8-t',
+        encode=Codec().encode,
+        decode=Codec().decode,
+        incrementalencoder=IncrementalEncoder,
+        incrementaldecoder=IncrementalDecoder,
+        streamreader=StreamReader,
+        streamwriter=StreamWriter,
+    )
+
+
+### Decoding Table
+
+decoding_table = (
+    '\x00'  # 0x00 -> NULL
+    '\x01'  # 0x01 -> START OF HEADING
+    '\x02'  # 0x02 -> START OF TEXT
+    '\x03'  # 0x03 -> END OF TEXT
+    '\x04'  # 0x04 -> END OF TRANSMISSION
+    '\x05'  # 0x05 -> ENQUIRY
+    '\x06'  # 0x06 -> ACKNOWLEDGE
+    '\x07'  # 0x07 -> BELL
+    '\x08'  # 0x08 -> BACKSPACE
+    '\t'  # 0x09 -> HORIZONTAL TABULAT
