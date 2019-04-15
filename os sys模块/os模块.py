@@ -1,16 +1,18 @@
 #encoding:utf-8
 import os
 #获取操作系统类型  nt->windows
-print(os.name)
+#print(os.name)
 
 #打印操作系统详细信息，windows不支持
 # print(os.uname())
 
 
 #获取操作系统所有环境变量
-# print(os.environ)
+#print(os.environ)
+
+
 #获取指定环境变量
-# print(os.environ.get('APPDATA'))
+#print(os.environ.get('APPDATA'))
 
 
 #获取当前目录  ./a/
@@ -30,7 +32,7 @@ print(os.name)
 # os.rmdir('os创建的目录')
 
 #获取文件属性
-# print(os.stat('os模块.py'))
+#print(os.stat('os sys模块.py'))
 
 #重命名
 # os.rename('old','new')
@@ -41,11 +43,11 @@ print(os.name)
 #运行shell命令
 # os.system('notepad')
 #记事本
-# os.system("write")
+#os.system("write")
 #关闭
-# os.system('taskkill /f /im no notpad++.exe')
+#os.system('taskkill /f /im no notpad++.exe')
 #画图
-# os.system('mspaint')
+os.system('mspaint')
 #设置
 # os.system('msconfig')
 #设置关机
@@ -59,16 +61,16 @@ print(os.name)
 # print(os.path.abspath('.'))
 
 #拼接路径
-# p1 = 'e:\pycharm_pro\基础文件\os模块'
+# p1 = 'e:\pycharm_pro\基础文件\os sys模块'
 # p2 = 'test\\a\\b\\c'
 # print(os.path.join(p1,p2))
 
 
 #拆分路径
-# print(os.path.split(r'e:\pycharm_pro\基础文件\os模块\test\a\b\c'))
+# print(os.path.split(r'e:\pycharm_pro\基础文件\os sys模块\test\a\b\c'))
 
 #获取扩展名
-# print(os.path.splitext(r'e:\pycharm_pro\基础文件\os模块\test\a\b\c'))
+# print(os.path.splitext(r'e:\pycharm_pro\基础文件\os sys模块\test\a\b\c'))
 
 
 #判断是否是目录
@@ -77,13 +79,13 @@ print(os.name)
 
 #判断文件存在
 # print(os.getcwd())
-# print(os.path.isfile(os.path.join(os.getcwd(),'os模块.py')))
+# print(os.path.isfile(os.path.join(os.getcwd(),'os sys模块.py')))
 
 #判断目录是否存在
 # print(os.path.exists())
 
 #获取文件大小(字节)
-# print(os.path.getsize(os.path.join(os.getcwd(),'os模块.py')))
+# print(os.path.getsize(os.path.join(os.getcwd(),'os sys模块.py')))
 
 #文件的目录
 # print(os.path.dirname(os.getcwd()))
