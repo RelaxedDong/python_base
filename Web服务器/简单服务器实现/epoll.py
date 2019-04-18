@@ -3,7 +3,6 @@
 # __time__ = 2019/4/16 12:42
 
 """
-
 IO多路复用: select,poll,epoll
 
 epoll:（有水平触发，竖直出发两种）
@@ -29,29 +28,40 @@ s.setsockopt(1,2,1)
 s.bind(('',8080))
 s.listen(1024)
 
-s_dict = {}
 
-epoll_instance = epoll()
-epoll_instance.register(s.fileno(),EPOLLIN|EPOLLET)
-while 1:
-    epoll_list = epoll_instance.poll()  #默认会堵塞，直到os检测到数据的到来，通过事件通知的方式 告诉这个程序，此时才会解堵塞
+# epoll_instance = epoll()
+# epoll_instance.register(s.fileno(),EPOLLIN|EPOLLET)
+# while 1:
+#     epoll_list = epoll_instance.poll()  #默认会堵塞，直到os检测到数据的到来，通过事件通知的方式 告诉这个程序，此时才会解堵塞
+#
+#     for fd,event in epoll_list: #（fd: 文件描述符  ，  event事件）
+#         if fd == s.fileno():
+#             cs,userinfo = s.accept()
+#             epoll_instance.register(cs.fileno(),EPOLLIN|EPOLLET)
+#             s_dict[cs.fileno()] = cs
+#         else:
+#             cs = s_dict[fd]
+#             recv_data = cs.recv(1024)
+#             print(recv_data.decode('gb2312'))
+#             if len(recv_data) > 0 :
+#                 cs.send(recv_data)
+#             else:
+#                 print('adsfasdf')
+#                 epoll_instance.unregister(fd) #移除
+#                 cs.close()
+#                 s_dict.pop(fd) #移除套接字
 
-    for fd,event in epoll_list: #（fd: 文件描述符  ，  event事件）
-        if fd == s.fileno():
-            cs,userinfo = s.accept()
-            epoll_instance.register(cs.fileno(),EPOLLIN|EPOLLET)
-            s_dict[cs.fileno()] = cs
-        else:
-            cs = s_dict[fd]
-            recv_data = cs.recv(1024)
-            print(recv_data.decode('gb2312'))
-            if len(recv_data) > 0 :
-                cs.send(recv_data)
-            else:
-                print('adsfasdf')
-                epoll_instance.unregister(fd) #移除
-                cs.close()
-                s_dict.pop(fd) #移除套接字
+
+
+
+
+
+
+
+
+
+
+
 
 
 
