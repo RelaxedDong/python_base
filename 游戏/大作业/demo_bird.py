@@ -3,7 +3,6 @@
 # __time__ = 2019/4/22 15:25
 import pygame
 
-
 class Bird(pygame.sprite.Sprite):
     def __init__(self):
         pygame.sprite.Sprite.__init__(self) # 初始化
